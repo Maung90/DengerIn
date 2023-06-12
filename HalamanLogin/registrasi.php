@@ -10,19 +10,19 @@
 <body>
     <div class="center">
       <h1>Regristrasi</h1>
-      <form method="post">
+      <form method="post" action="Tambahuser.php">
         <div class="txt_field">
-          <input type="text" required>
+          <input type="text" required name="username">
           <span></span>
           <label>Username</label>
         </div>
         <div class="txt_field">
-          <input type="password" required>
+          <input type="password" required  name="password">
           <span></span>
           <label>Password</label>
         </div>
         <div class="txt_field">
-          <input type="email" required>
+          <input type="email" required name="email">
           <span></span>
           <label>Email</label>
         </div>

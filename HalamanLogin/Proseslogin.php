@@ -5,7 +5,7 @@ include 'Koneksi.php';
 $usernames = $_POST['username'];
 $password = $_POST['password']; 
 
-$query = mysqli_query($koneksi,"SELECT * FROM userd WHERE username = '$usernames' AND password = '$password'");
+$query = mysqli_query($koneksi,"SELECT * FROM user WHERE username = '$usernames' AND password = '$password'");
 
 $data = mysqli_num_rows($query);
 print_r($data);
@@ -17,7 +17,7 @@ if ($data > 0) {
     if($role == 'user') {
         header("Location:../HalamanUser/index.html");
     }elseif($role == 'admin'){
-        print "admin";
+        header("Location:../dashboardAdmin/template/index.php");
     }else{
         print "Tidak ada username atau password";
     }

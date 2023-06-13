@@ -1,12 +1,13 @@
 <?php 
 require '../function.php';
-
 if (isset($_POST['submit'])) {
-	if ( insertDataUser($_POST) > 0) {
+	if ( insertDataUser($_POST,$_FILES) > 0) {
+
 	}else{
 		echo "insert gagal";
 	}
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +41,7 @@ if (isset($_POST['submit'])) {
 						<h3 class="page-title"> User </h3>
 						<nav aria-label="breadcrumb">
 							<form class="breadcrumb-item d-none d-lg-flex search">
-								<input type="text" class="form-control" placeholder="Search products">
+								<input type="text" class="form-control" placeholder="Search username or email">
 							</form>
 						</nav>
 					</div>
@@ -49,23 +50,23 @@ if (isset($_POST['submit'])) {
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Tambah data user</h4>
-									<form class="forms-sample" method="POST" action="">
+									<form class="forms-sample" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
 											<label for="exampleInputName1">username</label>
-											<input type="text" name="username" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Username">
+											<input type="text" name="username" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Username" required>
 										</div>
 										<div class="form-group">
 											<label for="exampleInputEmail3">Email address</label>
-											<input type="email" name="email" class="form-control" id="exampleInputEmail3" autocomplete="off" placeholder="Email">
+											<input type="email" name="email" class="form-control" id="exampleInputEmail3" autocomplete="off" placeholder="Email" required>
 										</div>
 										<div class="form-group">
 											<label for="exampleInputPassword4">Password</label>
-											<input type="password" name="password" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
+											<input type="password" name="password" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password" required>
 										</div>
 										<div class="form-group">
 											<label>File upload</label>
 											<div class="input-group col-xs-12">
-												<input type="file" name="image" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
+												<input type="file" name="image" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image" required>
 												<span class="input-group-append">
 												</span>
 											</div>
@@ -94,24 +95,39 @@ if (isset($_POST['submit'])) {
 												</tr>
 											</thead>
 											<tbody>
+												<!-- PAGINATION -->
 												<?php 
-												$query = mysqli_query($koneksi,"SELECT * FROM user WHERE role = 'user' ");
+												$halaman = @$_GET['page'];
+												$batas = 4;
+
+												$query2 = mysqli_query($koneksi,"SELECT * FROM user WHERE role = 'user'");
+												$jmlData = mysqli_num_rows($query2);
+												$jmlHalaman = ceil($jmlData/$batas);
+
+												if (!empty($halaman)) {
+													$posisi = ($halaman-1)* $batas;
+												}else{
+													$posisi =0;
+													$halaman = 1;
+												}
+
+												$query = mysqli_query($koneksi,"SELECT * FROM user WHERE role = 'user' LIMIT $posisi, $batas");
 												while ($data = mysqli_fetch_array($query)) :?>
 													<tr>
 														<td class="py-1">
-															<img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
+															<img src="../../assets/images/image-user/<?=$data['image']?> " alt="image" />
 														</td>
 														<td> <?=$data['username']  ?> </td>
 														<td><?=$data['password']  ?> </td>
 														<td> <?=$data['email']  ?></td>
 														<td>
 															<a class="badge badge-danger" href="delete.php?id=<?=$data['id_user']?> " style="text-decoration: none;">delete</a>
-															<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+															<label class="badge badge-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<?= $data['id_user']; ?>" style="cursor: pointer;">
 																update
-															</button>
+															</label>
 
 															<!-- Modal -->
-															<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal fade" id="exampleModal-<?= $data['id_user']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 																<div class="modal-dialog">
 																	<div class="modal-content">
 																		<div class="modal-header">
@@ -120,7 +136,7 @@ if (isset($_POST['submit'])) {
 																		</div>
 																		<div class="modal-body">
 																			
-																			<form class="forms-sample" method="POST" action="">
+																			<form class="forms-sample" method="POST" action="updateUser.php" enctype="multipart/form-data">
 																				<input type="hidden" name="id" value="<?=$data['id_user']?> ">
 																				<div class="form-group">
 																					<label for="exampleInputName1">username</label>
@@ -135,69 +151,82 @@ if (isset($_POST['submit'])) {
 																					<input type="password" value="<?=$data['password']  ?>" name="passwordUpdate" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
 																				</div>
 																				<div class="form-group">
-																					<label>File upload</label>
+																					<label>Upload Image</label>
 																					<div class="input-group col-xs-12">
 																						<input type="file" value="<?=$data['image']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
-																						<span class="input-group-append">
-																						</span>
+																						<!-- <span class="input-group-append">
+																						</span> -->
 																					</div>
 																				</div>
-																				<button type="submit" name="submitUpdate" class="btn btn-primary me-2">Submit</button>
+																				<div class="form-group">
+																					<button type="submit" name="submitUpdate" class="btn btn-primary me-2">Submit</button>
+																				</div>
 																			</form>
-																			<?php if (isset($_POST['submitUpdate'])) {
-																					if (updateDataUser($_POST) > 0) {
-																						
-																					}else{
-																						echo "update gagal";
-																					}
-																			} ?>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																			<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																				<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+																			</div>
 																		</div>
 																	</div>
 																</div>
-															</div>
 
-														</td>
-													</tr>
-												<?php endwhile; ?>
-											</tbody>
-										</table>
-									</div>
+															</td>
+														</tr>
+													<?php endwhile; ?>
+												</tbody>
+											</table>
+										</div>
 
-									<!-- <nav aria-label="..."> -->
 										<ul class="pagination mt-2">
-											<li class="page-item disabled">
-												<a class="page-link" href="#" aria-label="Previous">
-													<span aria-hidden="true">&laquo;</span>
-												</a>
-											</li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item">
-												<a class="page-link" href="#" aria-label="Next">
-													<span aria-hidden="true">&raquo;</span>
-												</a>
-											</li>
-										</ul>
+											<?php if ($halaman <=1) : ?>
+												<li class="page-item">
+													<a class="page-link" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													</a>
+												</li>
+											<?php else : ?>
+												<li class="page-item">
+													<a class="page-link" href="?page=<?=$halaman-=1;   ?> " aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													</a>
+												</li>
+											<?php endif; ?>
+											<?php 
+											for ($i=1; $i <= $jmlHalaman; $i++) { 
+												// if ($i == $halaman) { ?>
+													<li class="page-item"><a class="page-link" href="?page=<?=$i  ?> "><?=$i  ?></a></li>
+													<?php /*}*/
+												// else{
+													?>
+													<!-- <li class="page-item "><a class="page-link text-white bg-primary"> <?=$i;?> </a></li> -->
+													<?php	
+												}
+												?>
 
-										<!-- </nav> -->
+												<li class="page-item">
+													<a class="page-link" href="?page=<?=$halaman+=1;  ?>" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+													</a>
+												</li>
+											</ul>
+											<!-- TUTUP PAGINATION -->
+
+
+
+											<!-- </nav> -->
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- content-wrapper ends -->
-					<!-- partial:../../../../partials/_footer.html -->
+						<!-- content-wrapper ends -->
+						<!-- partial:../../../../partials/_footer.html -->
 
-					<?php require_once '../../partials/_footer.html'; ?>
-					<!-- partial -->
+						<?php require_once '../../partials/_footer.html'; ?>
+						<!-- partial -->
+					</div>
 				</div>
 			</div>
-		</div>
 
 
 
@@ -214,20 +243,20 @@ if (isset($_POST['submit'])) {
 
 
 
-		<!-- container-scroller -->
-		<!-- plugins:js -->
-		<script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
-		<!-- endinject -->
-		<!-- Plugin js for this page -->
-		<!-- End plugin js for this page -->
-		<!-- inject:js -->
-		<script src="../../assets/js/off-canvas.js"></script>
-		<script src="../../assets/js/hoverable-collapse.js"></script>
-		<script src="../../assets/js/misc.js"></script>
-		<script src="../../assets/js/settings.js"></script>
-		<script src="../../assets/js/todolist.js"></script>
-		<!-- endinject -->
-		<!-- Custom js for this page -->
-		<!-- End custom js for this page -->
-	</body>
-	</html>
+			<!-- container-scroller -->
+			<!-- plugins:js -->
+			<script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+			<!-- endinject -->
+			<!-- Plugin js for this page -->
+			<!-- End plugin js for this page -->
+			<!-- inject:js -->
+			<script src="../../assets/js/off-canvas.js"></script>
+			<script src="../../assets/js/hoverable-collapse.js"></script>
+			<script src="../../assets/js/misc.js"></script>
+			<script src="../../assets/js/settings.js"></script>
+			<script src="../../assets/js/todolist.js"></script>
+			<!-- endinject -->
+			<!-- Custom js for this page -->
+			<!-- End custom js for this page -->
+		</body>
+		</html>

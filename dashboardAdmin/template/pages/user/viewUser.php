@@ -1,9 +1,7 @@
 <?php 
 require '../function.php';
 if (isset($_POST['submit'])) {
-	if ( insertDataUser($_POST,$_FILES) > 0) {
-
-	}else{
+	if ( insertDataUser($_POST,$_FILES) <= 0) {
 		echo "insert gagal";
 	}
 }
@@ -26,6 +24,7 @@ if (isset($_POST['submit'])) {
 	<!-- endinject -->
 	<!-- Layout styles -->
 	<link rel="stylesheet" href="../../assets/css/style.css">
+	<link rel="stylesheet" href="../../assets/css/style2.css">
 	<!-- End layout styles -->
 	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
 </head>
@@ -41,7 +40,7 @@ if (isset($_POST['submit'])) {
 						<h3 class="page-title"> User </h3>
 						<nav aria-label="breadcrumb">
 							<form class="breadcrumb-item d-none d-lg-flex search">
-								<input type="text" class="form-control" placeholder="Search username or email">
+								<input type="text" class="form-control" id="key" placeholder="Search username or email">
 							</form>
 						</nav>
 					</div>
@@ -66,7 +65,7 @@ if (isset($_POST['submit'])) {
 										<div class="form-group">
 											<label>File upload</label>
 											<div class="input-group col-xs-12">
-												<input type="file" name="image" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image" required>
+												<input type="file" name="image" class="form-control" autocomplete="off" placeholder="Upload Image" required>
 												<span class="input-group-append">
 												</span>
 											</div>
@@ -77,14 +76,14 @@ if (isset($_POST['submit'])) {
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-7 grid-margin stretch-card">
+						<div class="col-lg-7 grid-margin stretch-card" >
 							<div class="card">
 								<div class="card-body" >
 									<h4 class="card-title">Tabel data</h4>
 									<p class="card-description">Tabel data<code>user</code>
 									</p>
-									<div class="table-responsive" style="overflow: scroll; scrollbar-width: thin;">
-										<table class="table table-hover">
+									<div class="table-responsive" style="overflow: scroll; scrollbar-width: thin;" id="tabel">
+										<table class="table table-hover" >
 											<thead>
 												<tr>
 													<th>Image</th>
@@ -99,7 +98,6 @@ if (isset($_POST['submit'])) {
 												<?php 
 												$halaman = @$_GET['page'];
 												$batas = 4;
-
 												$query2 = mysqli_query($koneksi,"SELECT * FROM user WHERE role = 'user'");
 												$jmlData = mysqli_num_rows($query2);
 												$jmlHalaman = ceil($jmlData/$batas);
@@ -112,7 +110,9 @@ if (isset($_POST['submit'])) {
 												}
 
 												$query = mysqli_query($koneksi,"SELECT * FROM user WHERE role = 'user' LIMIT $posisi, $batas");
-												while ($data = mysqli_fetch_array($query)) :?>
+												while ($data = mysqli_fetch_array($query)) :
+
+													?>
 													<tr>
 														<td class="py-1">
 															<img src="../../assets/images/image-user/<?=$data['image']?> " alt="image" />
@@ -153,7 +153,7 @@ if (isset($_POST['submit'])) {
 																				<div class="form-group">
 																					<label>Upload Image</label>
 																					<div class="input-group col-xs-12">
-																						<input type="file" value="<?=$data['image']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
+																						<input type="file" value="<?=$data['image']  ?>" name="imageUpdate" class="form-control" autocomplete="off" placeholder="Upload Image">
 																						<!-- <span class="input-group-append">
 																						</span> -->
 																					</div>
@@ -177,7 +177,7 @@ if (isset($_POST['submit'])) {
 											</table>
 										</div>
 
-										<ul class="pagination mt-2">
+										<ul class="pagination mt-2" id="pag">
 											<?php if ($halaman <=1) : ?>
 												<li class="page-item">
 													<a class="page-link" aria-label="Previous">
@@ -258,5 +258,25 @@ if (isset($_POST['submit'])) {
 			<!-- endinject -->
 			<!-- Custom js for this page -->
 			<!-- End custom js for this page -->
+				<script>
+            //ambil elemen
+				var key = document.getElementById('key');
+				var tabel = document.getElementById('tabel');
+				var page = document.getElementById('pag');
+				key.addEventListener('keyup',function(){
+					page.style.display = 'none';
+            //buat object ajax
+					var ajax = new XMLHttpRequest();
+
+					ajax.onreadystatechange = function(){
+						if(ajax.readyState == 4 && ajax.status == 200){
+							tabel.innerHTML = ajax.responseText;
+						}
+					}
+            //eksekusi ajax
+					ajax.open('GET','tabelUser.php?key=' + key.value ,true);
+					ajax.send();
+				});
+			</script>
 		</body>
 		</html>

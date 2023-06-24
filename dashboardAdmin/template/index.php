@@ -1,3 +1,4 @@
+<?php require_once 'partials/session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

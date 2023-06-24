@@ -14,6 +14,7 @@ $role = $data2['role'];
 
 if ($data > 0) {
     $_SESSION['username'] = $usernames;
+    $_SESSION['role'] = $role;
     if($role == 'user') {
         header("Location:../HalamanUser/index.html");
     }elseif($role == 'admin'){

@@ -1,3 +1,4 @@
+<?php require_once '../../partials/session.php'; ?>
 <?php 
 require '../function.php';
 if (isset($_POST['submit'])) {
@@ -27,6 +28,8 @@ if (isset($_POST['submit'])) {
 	<link rel="stylesheet" href="../../assets/css/style.css">
 	<!-- End layout styles -->
 	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+	<link rel="stylesheet" href="../../assets/DataTables/dataTables/css/dataTables.bootstrap5.css">
 </head>
 <body>
 	<div class="container-scroller">
@@ -38,11 +41,6 @@ if (isset($_POST['submit'])) {
 				<div class="content-wrapper">
 					<div class="page-header">
 						<h3 class="page-title"> Music </h3>
-						<nav aria-label="breadcrumb">
-							<form class="breadcrumb-item d-none d-lg-flex search">
-								<input type="text" class="form-control" id="key" placeholder="Search by title">
-							</form>
-						</nav>
 					</div>
 					<div class="row">
 						<div class="col-lg-5 grid-margin stretch-card">
@@ -90,7 +88,7 @@ if (isset($_POST['submit'])) {
 								<p class="card-description">Tabel data<code>Music</code>
 								</p>
 								<div class="table-responsive" style="overflow: scroll; scrollbar-width: thin;">
-									<table class="table table-hover" id="tabel">
+									<table class="table table-hover" id="tabel-data">
 										<thead>
 											<tr>
 												<th>Title</th>
@@ -100,23 +98,8 @@ if (isset($_POST['submit'])) {
 											</tr>
 										</thead>
 										<tbody>
-											<!-- PAGINATION -->
 											<?php 
-											$halaman = @$_GET['page'];
-											$batas = 4;
-
-											$query2 = mysqli_query($koneksi,"SELECT * FROM music ");
-											$jmlData = mysqli_num_rows($query2);
-											$jmlHalaman = ceil($jmlData/$batas);
-
-											if (!empty($halaman)) {
-												$posisi = ($halaman-1)* $batas;
-											}else{
-												$posisi =0;
-												$halaman = 1;
-											}
-
-											$query = mysqli_query($koneksi,"SELECT * FROM music LIMIT $posisi, $batas");
+											$query = mysqli_query($koneksi,"SELECT * FROM music");
 											while ($data = mysqli_fetch_array($query)) :?>
 												<tr>
 													<td> <?=$data['judul']  ?> </td>
@@ -179,37 +162,6 @@ if (isset($_POST['submit'])) {
 											</tbody>
 										</table>
 									</div>
-
-									<ul class="pagination mt-2" id="page">
-										<?php if ($halaman <=1) : ?>
-											<li class="page-item">
-												<a class="page-link" aria-label="Previous">
-													<span aria-hidden="true">&laquo;</span>
-												</a>
-											</li>
-										<?php else : ?>
-											<li class="page-item">
-												<a class="page-link" href="?page=<?=$halaman-=1;   ?> " aria-label="Previous">
-													<span aria-hidden="true">&laquo;</span>
-												</a>
-											</li>
-										<?php endif; ?>
-										<?php 
-										for ($i=1; $i <= $jmlHalaman; $i++) { ?>
-											<li class="page-item"><a class="page-link" href="?page=<?=$i  ?> "><?=$i  ?></a></li>
-										<?php 	} ?>
-
-										<li class="page-item">
-											<a class="page-link" href="?page=<?=$halaman+=1;  ?>" aria-label="Next">
-												<span aria-hidden="true">&raquo;</span>
-											</a>
-										</li>
-									</ul>
-									<!-- TUTUP PAGINATION -->
-
-
-
-									<!-- </nav> -->
 								</div>
 							</div>
 						</div>
@@ -224,22 +176,6 @@ if (isset($_POST['submit'])) {
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- container-scroller -->
 	<!-- plugins:js -->
 	<script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
 	<!-- endinject -->
@@ -254,26 +190,13 @@ if (isset($_POST['submit'])) {
 	<!-- endinject -->
 	<!-- Custom js for this page -->
 	<!-- End custom js for this page -->
+	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+	<script src="../../assets/DataTables/dataTables/js/jquery.dataTables.js"></script>
+	<script src="../../assets/DataTables/dataTables/js/dataTables.bootstrap5.min.js"></script>
 	<script>
-            //ambil elemen
-		var key = document.getElementById('key');
-		var tabel = document.getElementById('tabel');
-		var page = document.getElementById('page');
-
-		key.addEventListener('keyup',function(){
-			page.style.display='none';
-
-            //buat object ajax
-			var ajax = new XMLHttpRequest();
-
-			ajax.onreadystatechange = function(){
-				if(ajax.readyState == 4 && ajax.status == 200){
-					tabel.innerHTML = ajax.responseText;
-				}
-			}
-            //eksekusi ajax
-			ajax.open('GET','tabelMusic.php?key=' + key.value ,true);
-			ajax.send();
+		$(document).ready(function(){
+			$('#tabel-data').DataTable();
 		});
 	</script>
 </body>

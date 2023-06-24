@@ -12,11 +12,10 @@ function insertDataUser($data,$file){
 	$password = $data['password'];
 	$email = $data['email'];
 	$image = $file["image"]["name"];
-
-
-$selectId = mysqli_query($koneksi,"SELECT max(id_user) FROM user");
-$data2 = mysqli_fetch_array($selectId);
-$id = $data2["max(id_user)"]+1;
+	
+	$selectId = mysqli_query($koneksi,"SELECT max(id_user) FROM user");
+	$data2 = mysqli_fetch_array($selectId);
+	$id = $data2["max(id_user)"]+1;
 
 	$target_dir = "../../assets/images/image-user/";
 	$target_file =$target_dir.basename($file["image"]["name"]);

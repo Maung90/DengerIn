@@ -13,6 +13,7 @@ $data2 = mysqli_fetch_array($query);
 $role = $data2['role'];
 
 if ($data > 0) {
+    $_SESSION['id'] = $data2['id_user'];
     $_SESSION['username'] = $usernames;
     $_SESSION['role'] = $role;
     if($role == 'user') {

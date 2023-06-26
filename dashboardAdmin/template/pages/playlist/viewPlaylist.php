@@ -1,24 +1,21 @@
-<?php require_once '../../partials/session.php'; 
+<?php require_once '../../partials/session.php'; ?>
+<?php
+	require '../function.php';
+	$id = $_SESSION['id'];
+	$query = mysqli_query($koneksi,"SELECT * FROM user WHERE id_user = '$id' ");
 
-?>
+$r = mysqli_fetch_array($query);
+ ?>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Playlist</title>
-	<!-- plugins:css -->
-	<link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
-	<link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
-	<!-- endinject -->
-	<!-- Plugin css for this page -->
-	<!-- End plugin css for this page -->
-	<!-- inject:css -->
-	<!-- endinject -->
-	<!-- Layout styles -->
+	<link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css"> 
+	<link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css"> 
 	<link rel="stylesheet" href="../../assets/css/style.css">
-	<link rel="stylesheet" href="../../assets/css/style2.css">
-	<!-- End layout styles -->
-	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
+	<link rel="stylesheet" href="../../assets/css/style2.css"> 
+	<link rel="shortcut icon" href="../../assets/images/favicon.png" /> 
 </head>
 <body>
 	<div class="container-scroller">
@@ -31,9 +28,8 @@
 					<div class="page-header">
 						<h3 class="page-title"> Playlist </h3>	
 						<nav aria-label="breadcrumb">
-							<label class="badge badge-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="cursor: pointer;">+ Tambah Playlist</label>
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<label class="badge badge-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="cursor: pointer;">+ Tambah Playlist</label> 
+							<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -42,14 +38,15 @@
 										</div>
 										<div class="modal-body"> 
 											<form class="forms-sample" method="POST" action="aksi.php" enctype="multipart/form-data">
+												<input type="hidden" name="id"	value="<?=$r['id_user']?> ">
 												<div class="form-group">
 													<label for="exampleInputName1">Nama Playlist</label>
-													<input type="text" name="namaPlaylist" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Nama Playlist">
+													<input type="text" name="namaPlaylist" class="form-control" required id="exampleInputName1" autocomplete="off" placeholder="Nama Playlist" style="color: cccfff;">
 												</div>
 												<div class="form-group">
-													<label>Sampul Playlist</label>
+													<label for="exampleInputName2">Sampul Playlist</label>
 													<div class="input-group col-xs-12">
-														<input type="file" name="imagePlaylist" class="form-control" autocomplete="off" placeholder="Upload Image">
+														<input type="file" name="cover" class="form-control" required autocomplete="off" id="exampleInputName2" placeholder="Upload Image" style="color: cccfff;">
 													</div>
 												</div>
 												<div class="modal-footer">
@@ -78,19 +75,15 @@
 									</h5>
 									<div class="d-flex justify-content-between">
 										<a href="#" class="btn btn-primary">Lihat Detail</a>
-										<a href="#" class="btn btn-danger" onclick="confirm('yakin akan dihapus?');">Hapus</a>
+										<a href="aksi.php?delete=true&id=<?=$data['id_playlist_name'];   ?> " class="btn btn-danger" onclick="confirm('yakin akan dihapus?');">Hapus</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- content-wrapper ends -->
-				<!-- partial:../../../../partials/_footer.html -->
-
-				<?php require_once '../../partials/_footer.html'; ?>
-				<!-- partial -->
-			</div>
+				<?php require_once '../../partials/_footer.html'; ?> 
+			</div> 
 		</div>
 	</div>
 
@@ -112,21 +105,12 @@
 
 
 
-
-	<!-- container-scroller -->
-	<!-- plugins:js -->
-	<script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="../../assets/js/off-canvas.js"></script>
+ 
+	<script src="../../assets/vendors/js/vendor.bundle.base.js"></script> 
+	<script src="../../assets/js/off-canvas.js"></script> 
 	<script src="../../assets/js/hoverable-collapse.js"></script>
 	<script src="../../assets/js/misc.js"></script>
 	<script src="../../assets/js/settings.js"></script>
-	<script src="../../assets/js/todolist.js"></script>
-	<!-- endinject -->
-	<!-- Custom js for this page -->
-	<!-- End custom js for this page -->
-</body>
+	<script src="../../assets/js/todolist.js"></script> 
+</body> 
 </html>

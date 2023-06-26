@@ -100,9 +100,9 @@ if (isset($_POST['submit'])) {
 										<tbody>
 											<?php 
 											$query = mysqli_query($koneksi,"SELECT * FROM music");
-											while ($data = mysqli_fetch_array($query)) :?>
+											while ($data = mysqli_fetch_array($query)) : ?>
 												<tr>
-													<td> <?=$data['judul']  ?> </td>
+													<td> <?=  str_replace( '.mp3',' ', $data['judul']);?> </td>
 													<td><?=$data['penyanyi']  ?> </td>
 													<td> <?=$data['genre']  ?></td>
 													<td>

@@ -2,9 +2,9 @@
 <?php
 	require '../function.php';
 	$id = $_SESSION['id'];
-	$query = mysqli_query($koneksi,"SELECT * FROM user WHERE id_user = '$id' ");
+	$select = mysqli_query($koneksi,"SELECT * FROM user WHERE id_user = '$id' ");
 
-$r = mysqli_fetch_array($query);
+$r = mysqli_fetch_array($select);
  ?>
 <html lang="en">
 <head>
@@ -38,7 +38,7 @@ $r = mysqli_fetch_array($query);
 										</div>
 										<div class="modal-body"> 
 											<form class="forms-sample" method="POST" action="aksi.php" enctype="multipart/form-data">
-												<input type="hidden" name="id"	value="<?=$r['id_user']?> ">
+												<input type="hidden" name="id"	value="<?=$r['id_user']?>">
 												<div class="form-group">
 													<label for="exampleInputName1">Nama Playlist</label>
 													<input type="text" name="namaPlaylist" class="form-control" required id="exampleInputName1" autocomplete="off" placeholder="Nama Playlist" style="color: cccfff;">
@@ -66,20 +66,25 @@ $r = mysqli_fetch_array($query);
 								<input type="text" class="p-2 text-lightgrey" style="border:none;width: 30%;background-color: #191c24; color:#f0f0f0; font-size: 15px;" placeholder="&nbsp;search playlist. . .">
 							</form>
 						</div>
+						<?php 
+						$query = mysqli_query($koneksi,"SELECT * FROM playlist_name WHERE id_user = '1' ");
+						while($data = mysqli_fetch_array($query)) : 
+							?>
 						<div class="col-lg-3 mt-2">
 							<div class="card">
-								<img class="card-img-top" alt="..." style="text-align: center;" src="../../../../cover1.jpg">
+								<img class="card-img-top" alt="..." style="text-align: center;" src="../../assets/images/cover-playlist/<?=$data['imagePlaylist'];?>">
 								<div class="card-body">
 									<h5 class="card-title">
-										Hello World
+										<?=$data['playlist_name'];?>
 									</h5>
 									<div class="d-flex justify-content-between">
 										<a href="#" class="btn btn-primary">Lihat Detail</a>
-										<a href="aksi.php?delete=true&id=<?=$data['id_playlist_name'];   ?> " class="btn btn-danger" onclick="confirm('yakin akan dihapus?');">Hapus</a>
+										<a href="aksi.php?delete=true&id=<?=$data['id_playlist_name'];?>" class="btn btn-danger" onclick="confirm('yakin akan dihapus?');">Hapus</a>
 									</div>
 								</div>
 							</div>
 						</div>
+					<?php endwhile; ?>
 					</div>
 				</div>
 				<?php require_once '../../partials/_footer.html'; ?> 

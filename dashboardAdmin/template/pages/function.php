@@ -93,8 +93,6 @@ function insertDataMusic($data,$file){
 	$title = $file['title']['name'];
 	$image = $file["image"]["name"];
 
-
-
 	/* TARGET DIR */
 	$music_dir = "../../assets/music/";
 	$music_file =$music_dir.basename($file["title"]["name"]);
@@ -107,7 +105,7 @@ function insertDataMusic($data,$file){
 	// type file
 	$covertype = strtolower(pathinfo($cover_file,PATHINFO_EXTENSION));
 	$musictype = strtolower(pathinfo($music_file,PATHINFO_EXTENSION));
- 
+
 
 	$cover_name = $cover_dir.basename(str_replace('.mp3','', $title).'.'.$covertype);
 	$cover_name2 = str_replace('.mp3','', $title).'.'.$covertype;
@@ -125,9 +123,11 @@ function insertDataMusic($data,$file){
 			}
 			else{
 				if (move_uploaded_file($_FILES["image"]["tmp_name"],$cover_name) AND move_uploaded_file($_FILES["title"]["tmp_name"],$music_file)) {
-					echo "true";
 					$query = mysqli_query($koneksi,"INSERT INTO music VALUES 
 						('','$title','$genre','$artist','$cover_name2','$lirik')");
+					if (!$query) {
+							echo "gagal";
+					}
 				}else{
 					echo "insert gagal";
 				}

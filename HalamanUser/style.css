@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 	font-family: 'Poppins', sans-serif;
+
 }
 html{
 	scrollbar-width: none;
@@ -57,4 +58,43 @@ html{
 	width: 50px;
 	margin: 5px;
 	border-radius: 5px;
+}
+.dropdown-custom{
+	margin-right: 20px;
+}
+.dropdown-custom .profile {
+	cursor: pointer;
+}
+.dropdown-custom .dropdown-menu-custom{
+	top: 55px;
+	position: absolute;
+	right: 50px;
+	list-style: none;
+	padding: 15px;
+	border-radius: 5px;
+	background-color: #fcfcfc;
+	display: none;
+}
+.dropdown-menu-custom li{
+	padding: 5px 10px;
+
+}
+.dropdown-menu-custom li:hover{
+	background-color: #cccc;
+}
+.input-box{
+	padding: 3px 0 3px 10px;
+	border-radius: 5px;
+	background-color: white;
+}
+.search-box{
+	border:none;
+	height: 100%;
+	border-radius: 5px;
+}
+.search-box:active{
+	border: none;
+}
+.search-box:focus{
+	outline:none;
 }

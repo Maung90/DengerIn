@@ -18,15 +18,8 @@ if (isset($_POST['submit'])) {
 	<!-- plugins:css -->
 	<link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
 	<link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
-	<!-- endinject -->
-	<!-- Plugin css for this page -->
-	<!-- End plugin css for this page -->
-	<!-- inject:css -->
-	<!-- endinject -->
-	<!-- Layout styles -->
-	<link rel="stylesheet" href="../../assets/css/style2.css">
-	<link rel="stylesheet" href="../../assets/css/style.css">
-	<!-- End layout styles -->
+	<link rel="stylesheet" href="../../assets/css/style2.css"> 
+	<link rel="stylesheet" href="../../assets/css/style.css"> 
 	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
 
 	<link rel="stylesheet" href="../../assets/DataTables/dataTables/css/dataTables.bootstrap5.css">
@@ -50,20 +43,20 @@ if (isset($_POST['submit'])) {
 									<form class="forms-sample" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
 											<label for="exampleInputName1">Title</label>
-											<input type="file" name="title" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="title" required>
+											<input  style="color: grey" type="file" name="title" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="title" required>
 										</div>
 										<div class="form-group">
 											<label for="exampleInputName1">Artist</label>
-											<input type="text" name="artist" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Artist" required>
+											<input  style="color: grey" type="text" name="artist" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Artist" required>
 										</div>
 										<div class="form-group">
 											<label for="exampleInputName1">Genre</label>
-											<input type="text" name="genre" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Genre" required>
+											<input  style="color: grey" type="text" name="genre" class="form-control" id="exampleInputName1" autocomplete="off" placeholder="Genre" required>
 										</div>
 										<div class="form-group">
 											<label>Cover Music</label>
 											<div class="input-group col-xs-12">
-												<input type="file" name="image" class="form-control" autocomplete="off" placeholder="Upload Image" required>
+												<input  style="color: grey" type="file" name="image" class="form-control" autocomplete="off" placeholder="Upload Image" required>
 												<span class="input-group-append">
 												</span>
 											</div>
@@ -106,7 +99,7 @@ if (isset($_POST['submit'])) {
 													<td><?=$data['penyanyi']  ?> </td>
 													<td> <?=$data['genre']  ?></td>
 													<td>
-														<a class="badge badge-danger" href="delete.php?id=<?=$data['id_music']?> " style="text-decoration: none;">delete</a>
+														<a class="badge badge-danger" href="deleteMusic.php?id=<?=$data['id_music']?> " style="text-decoration: none;" onclick="confirm('apakah yakin akan dihapus?');">delete</a>
 														<label class="badge badge-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<?= $data['id_music']; ?>" style="cursor: pointer;">
 															update
 														</label>
@@ -122,23 +115,23 @@ if (isset($_POST['submit'])) {
 																	<div class="modal-body">
 
 																		<form class="forms-sample" method="POST" action="updateUser.php" enctype="multipart/form-data">
-																			<input type="hidden" name="id" value="<?=$data['id_music']?> ">
+																			<input  style="color: grey" type="hidden" name="id" value="<?=$data['id_music']?> ">
 																			<div class="form-group">
 																				<label for="exampleInputName1">title</label>
-																				<input type="text" name="titleUpdate" class="form-control" id="exampleInputName1" value="<?=$data['judul']  ?>" autocomplete="off" placeholder="Username">
+																				<input  style="color: grey" type="text" name="titleUpdate" class="form-control" id="exampleInputName1" value="<?=$data['judul']  ?>" autocomplete="off" placeholder="Username">
 																			</div>
 																			<div class="form-group">
 																				<label for="exampleInputEmail3">Artist</label>
-																				<input type="email" name="penyanyiUpdate" class="form-control" id="exampleInputEmail3" value="<?=$data['penyanyi']  ?>" autocomplete="off" placeholder="Email">
+																				<input  style="color: grey" type="email" name="penyanyiUpdate" class="form-control" id="exampleInputEmail3" value="<?=$data['penyanyi']  ?>" autocomplete="off" placeholder="Email">
 																			</div>
 																			<div class="form-group">
 																				<label for="exampleInputPassword4">Genre</label>
-																				<input type="password" value="<?=$data['genre']  ?>" name="genreUpdate" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
+																				<input  style="color: grey" type="password" value="<?=$data['genre']  ?>" name="genreUpdate" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
 																			</div>
 																			<div class="form-group">
 																				<label>Cover Lagu</label>
 																				<div class="input-group col-xs-12">
-																					<input type="file" value="<?=$data['image']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
+																					<input  style="color: grey" type="file" value="<?=$data['image']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
 																				</div>
 																			</div>
 																			<div class="form-group">

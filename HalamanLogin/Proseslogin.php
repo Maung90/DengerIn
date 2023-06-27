@@ -17,7 +17,7 @@ if ($data > 0) {
     $_SESSION['username'] = $usernames;
     $_SESSION['role'] = $role;
     if($role == 'user') {
-        header("Location:../HalamanUser/index.html");
+        header("Location:../HalamanUser/index.php");
     }elseif($role == 'admin'){
         header("Location:../dashboardAdmin/template/index.php");
     }else{

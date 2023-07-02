@@ -1,6 +1,6 @@
 <?php 
 
 
-header('Location:HalamanLogin/form.php');
+header('Location:LandingPage/');
 
  ?>

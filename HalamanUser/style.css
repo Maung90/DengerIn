@@ -6,9 +6,6 @@
 	font-family: 'Poppins', sans-serif;
 
 }
-html{
-	scrollbar-width: none;
-}
 .nav-link{
 	margin: 10px 0;
 	height: 70px;
@@ -44,13 +41,14 @@ html{
 	width: 70px;
 }
 .scroll-item{
+	scrollbar-width: thin;
 	height: 180px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
-.scroll-item  ::-webkit-scrollbar {
+/*.scroll-item  ::-webkit-scrollbar {
 	width: 10px;
-}
+}*/
 .list-item{
 	width: 50px;
 }
@@ -97,4 +95,5 @@ html{
 }
 .search-box:focus{
 	outline:none;
+
 }

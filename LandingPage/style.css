@@ -1,0 +1,100 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  *{
+    margin :0;
+    padding: 0;
+    text-decoration: none;
+}
+.landing-pg{
+    width: 100vw;
+    height: 100vh;
+
+    background: #272727;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.nav{
+    width: 100vw;
+    height: 77px;
+    flex-shrink: 0;
+    background-color: #1a1919;
+    position: absolute;
+}
+
+.logo{
+    display: flex;
+    width: 209px;
+    height: 53.979px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 10px 40px;
+
+    color: #F7F5FE;
+    font-size: 40px;
+    font-family: Poppins;
+    font-weight: 600;
+}
+
+.btn-sign{
+    position: absolute;
+    right:0;
+    margin: 14px 40px;
+    display: inline-flex;
+    padding: 10px 30px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 20px;
+    border: 3px solid #ABFD79;
+    backdrop-filter: blur(10);
+    font-family: Poppins;
+    text-decoration: none ;
+    color: #ABFD79;
+}
+.btn-sign:hover {
+    background-color: #ABFD79;  
+    color: black;
+}
+img{
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    width:50%;
+    height: 93%;
+}
+.btn-sign1{
+    margin: 14px 40px;
+    display: inline-flex;
+    padding: 10px 30px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 20px;
+    border: 3px solid #ABFD79;
+    backdrop-filter: blur(10);
+    font-family: Poppins;
+    text-decoration: none ;
+    color: #ABFD79;
+    font-size: 25px;
+}
+.txt{
+    position: absolute;
+    display: flex;
+    right: 70px;
+    bottom: 280px;
+    width: 700px;
+    height: 125px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 36px;
+    font-family: Poppins;
+    font-weight: 700;
+
+
+}
+.btn-sign1:hover {
+    background-color: #a9fb75;
+    color: black;
+}

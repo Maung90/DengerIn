@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300&family=Roboto+Slab&family=Poppins:wght@300&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+html{
+  scrollbar-width: none;
+}
+.nav-link{
+  margin: 10px 0;
+  height: 70px;
+  width: 70px;
+}
+.iconn{
+  font-size: 25px;
+}
+.card-custom{
+  width: 95%;
+  background-color: #202020;
+  height: 100%;
+  padding: 6px;
+  border-radius: 3px;
+}
+.text{
+  margin: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Karla', sans-serif;
+  color: white;
+}
+.text-2{
+  margin: 5px;
+  color: #c9c9;
+}
+.button{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.scroll{
+  width: 70px;
+}
+.scroll-item{
+  height: 180px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.scroll-item  ::-webkit-scrollbar {
+  width: 10px;
+}
+.list-item{
+  width: 50px;
+}
+.playlist{
+  width: 50px;
+  margin: 5px;
+  border-radius: 5px;
+}

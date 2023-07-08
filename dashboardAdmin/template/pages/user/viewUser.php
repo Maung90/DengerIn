@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 	<link rel="stylesheet" href="../../assets/css/style.css">
 	<link rel="stylesheet" href="../../assets/css/style2.css">
 	<!-- End layout styles -->
-	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
+	<link rel="shortcut icon" href="http://localhost/DengerIn/dashboardAdmin/template/assets/images/icon-mini.png" />
 </head>
 <body>
 	<div class="container-scroller">
@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
 														<td><?=$data['password']  ?> </td>
 														<td> <?=$data['email']  ?></td>
 														<td>
-															<a class="badge badge-danger" href="delete.php?id=<?=$data['id_user']?> " style="text-decoration: none;">delete</a>
+															<a class="badge badge-danger" href="delete.php?id=<?=$data['id_user']?> " style="text-decoration: none;" onclick="confirm('yakin dihapus ?');">delete</a>
 															<label class="badge badge-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<?= $data['id_user']; ?>" style="cursor: pointer;">
 																update
 															</label>
@@ -123,15 +123,15 @@ if (isset($_POST['submit'])) {
 																				<input type="hidden" name="id" value="<?=$data['id_user']?> ">
 																				<div class="form-group">
 																					<label for="exampleInputName1">username</label>
-																					<input type="text" name="usernameUpdate" class="form-control" id="exampleInputName1" value="<?=$data['username']  ?>" autocomplete="off" placeholder="Username">
+																					<input type="text" name="usernameUpdate" class="form-control" required id="exampleInputName1" value="<?=$data['username']  ?>" autocomplete="off" placeholder="Username">
 																				</div>
 																				<div class="form-group">
 																					<label for="exampleInputEmail3">Email address</label>
-																					<input type="email" name="emailUpdate" class="form-control" id="exampleInputEmail3" value="<?=$data['email']  ?>" autocomplete="off" placeholder="Email">
+																					<input type="email" name="emailUpdate" class="form-control" required id="exampleInputEmail3" value="<?=$data['email']  ?>" autocomplete="off" placeholder="Email">
 																				</div>
 																				<div class="form-group">
 																					<label for="exampleInputPassword4">Password</label>
-																					<input type="password" value="<?=$data['password']  ?>" name="passwordUpdate" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
+																					<input type="password" value="<?=$data['password']  ?>" required name="passwordUpdate" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
 																				</div>
 																				<div class="form-group">
 																					<label>Upload Image</label>

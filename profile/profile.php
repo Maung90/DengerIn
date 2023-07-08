@@ -46,7 +46,7 @@ $data = mysqli_fetch_array($query);
   <div class="container-fluid content-custom">
     <div class="row">
       <!-- sidebar  -->
-      <div class="col-1 bg-dark d-flex justify-content-center" style="height: 120vh;">
+      <div class="col-1 bg-dark d-flex justify-content-center" style="height: 100vh;">
         <nav class="nav flex-column sidebar">
           <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/index.php">
             <center>
@@ -80,10 +80,10 @@ $data = mysqli_fetch_array($query);
       <div class="col-11" style="background-color:grey;">
        <div class="row vh-100" style="position: relative; display:block;">
         <div class="col-12 bg-dark" style="height: 30vh;" ></div>
-        <div class="col-12" style="height: 250px; width:250px; position:absolute; top: 12%; right:42%; border-radius:50%; background-image:url('../dashboardAdmin/template/assets/images/image-user/<?=$data['image']?>'); background-size :contain">
+        <div class="col-12" style="height: 250px; width:250px; position:absolute; top: 6%; right:42%; border-radius:50%; background-image:url('../dashboardAdmin/template/assets/images/image-user/<?=$data['image']?>'); background-size :contain">
           <i class="fa-solid fa-pen-to-square text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor:pointer; position:absolute; bottom: 5%; right:15%; font-size:20px;"></i>
         </div>
-        <div class="col-12 text-white" style="position:absolute; bottom:15%;">
+        <div class="col-12 text-white" style="position:absolute; bottom:10%;">
           <form action="aksi.php" method="POST" style="position:absolute; right:35%;bottom:25%">
             <input type="hidden" name="id" value="<?=$data['id_user']?>">
             <label for="" style="display: block;">Username</label>

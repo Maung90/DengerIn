@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("Location:HalamanLogin/Form.php");
+header("Location:HalamanLogin/Login.php");
 ?>

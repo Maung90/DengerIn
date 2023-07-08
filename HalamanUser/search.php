@@ -7,7 +7,7 @@ $id = $_SESSION['id'];
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Halaman Awal</title>
+  <title>Search</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -55,8 +55,8 @@ $id = $_SESSION['id'];
                $query = mysqli_query($koneksi,"SELECT * FROM playlist_name 
                 WHERE id_user = '$id' ");
                 while ($data = mysqli_fetch_array($query)) : ?> 
-                 <a class="list-item" href="#list-item-1">
-                  <img src="../cover1.jpg" class="playlist" alt="...">
+                 <a class="list-item" href="#">
+                  <img src="../dashboardAdmin/template/assets/images/cover-playlist/<?=$data['imagePlaylist']?>" class="playlist" alt="...">
                 </a>
               <?php endwhile; ?>
             </div> 
@@ -70,91 +70,92 @@ $id = $_SESSION['id'];
             <form action="">
               <div class="input-box">
                 <i class="fa-solid fa-search" style="color:black;"></i>
-                <input type="text" id="search" class="search search-box" placeholder="Search playlist,judul dan penyanyi...">
+                <input type="text" id="search" class="search search-box" placeholder="cari playlist, judul atau penyanyi ">
               </div>
             </form>
           </div>
         </div>
         <div class="row m-3"  id="result">
-          <div class="col-12 d-flex justify-content-end">
-            
-          </div>
-        </div>
-        <div class="row m-3">
-          <div class="genre d-flex justify-content-between text-white mb-1">
-            <?php 
-            $selectGenre = mysqli_query($koneksi,"SELECT genre FROM music ORDER BY RAND()"); 
-            $data = mysqli_fetch_array($selectGenre);
-            ?>
-            <h3><?=$data['genre'];?> </h3>
+          <div class="col-12" >
+            <div class="genre d-flex justify-content-between text-white mb-1">
+              <?php 
+              $selectGenre = mysqli_query($koneksi,"SELECT genre FROM music ORDER BY RAND()"); 
+              $data = mysqli_fetch_array($selectGenre);
+              ?>
+              <h3><?=$data['genre'];?> </h3>
+              <a href="#" class="button">show all</a>
+            </div>
+            <div class="row">
+              <?php 
+              $genre = $data['genre'];
+              $genre = mysqli_query($koneksi,"SELECT * FROM music WHERE genre = '$genre' ");
+              $rep = array('.mp3','-','_'); 
+              while ($data2 = mysqli_fetch_array($genre)) : ?>
+                <div class="list col-2">
+                  <div class="card-custom">
+                    <a href="detailMusic.php?id=<?=$data2['id_music']?>" class="link" style="text-decoration:none;">
+                      <img src="../dashboardAdmin/template/assets/images/cover-music/<?=$data2['poster_lagu']?> " class="card-img-top" width="150px" height="150px" alt="...">
+                      <p class="text">
+                       <?= $data2['penyanyi']  ?> 
+                     </p>
+                     <p class="text-2" >
+                       <?= str_replace($rep,' ',$data2['judul'])?>  
+                     </p>
+                   </a>
+                 </div>
+               </div>
+             <?php endwhile; ?>
+           </div>
+         </div>
+         <div class="col-12">
+          <div class="genre d-flex justify-content-between text-white mb-1" >
+            <h3>Mood</h3>
             <a href="#" class="button">show all</a>
           </div>
-          <?php 
-          $genre = $data['genre'];
-          $genre = mysqli_query($koneksi,"SELECT * FROM music WHERE genre = '$genre' ");
-          $rep = array('.mp3','-','_'); 
-          while ($data2 = mysqli_fetch_array($genre)) : ?>
-            <div class="list col-2">
+          <div class="row">
+            <div class="col-2">
               <div class="card-custom">
-                <a href="detailMusic.php?id=<?=$data2['id_music']?>" class="link" style="text-decoration:none;">
-                  <img src="../dashboardAdmin/template/assets/images/cover-music/<?=$data2['poster_lagu']?> " class="card-img-top" width="150px" height="150px" alt="...">
+                <a href="#" style="text-decoration:none">
+                  <img src="../cover1.jpg" class="card-img-top" alt="...">
                   <p class="text">
-                   <?= $data2['penyanyi']  ?> 
-                 </p>
-                 <p class="text-2" >
-                   <?= str_replace($rep,' ',$data2['judul'])?>  
-                 </p>
-               </a>
-             </div>
-           </div>
-         <?php endwhile; ?>
-       </div>
-       <div class="row m-3">
-        <div class="genre d-flex justify-content-between text-white mb-1" >
-          <h3>Mood</h3>
-          <a href="#" class="button">show all</a>
-        </div>
-        <div class="col-2">
-          <div class="card-custom">
-            <a href="#" style="text-decoration:none">
-              <img src="../cover1.jpg" class="card-img-top" alt="...">
-              <p class="text">
-                Slamet Anjay
-              </p>
-              <p class="text-2">
-                Lorem ipsum dolor sit 
-              </p></a>
+                    Slamet Anjay
+                  </p>
+                  <p class="text-2">
+                    Lorem ipsum dolor sit 
+                  </p>
+                </a>
+              </div>
             </div>
           </div>
-
-
-
-
-
         </div>
       </div>
+
     </div>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
-  <script>
-    let dropdown = document.querySelector('.dropdown-custom');
-    let menuDropdown = document.querySelector('.dropdown-menu-custom');
-    dropdown.addEventListener('click',function () {
-      menuDropdown.style.display = 'block';
-    });
-    dropdown.addEventListener('dblclick',function () {
-      menuDropdown.style.display = 'none';
-    });
-  </script>
-  <script>
+<script>
+  let dropdown = document.querySelector('.dropdown-custom');
+  let menuDropdown = document.querySelector('.dropdown-menu-custom');
+  dropdown.addEventListener('click',function () {
+    menuDropdown.style.display = 'block';
+  });
+  dropdown.addEventListener('dblclick',function () {
+    menuDropdown.style.display = 'none';
+  });
+</script>
+<script>
             //ambil elemen
-    var key = document.getElementById('search');
-    var result = document.getElementById('result');
+  var key = document.getElementById('search');
+  var result = document.getElementById('result');
 
-    key.addEventListener('keyup',function(){
+  key.addEventListener('keyup',function(){
+
+    var searchValue = key.value.trim();
+    if (searchValue !== '') {
             //buat object ajax
       var ajax = new XMLHttpRequest();
 
@@ -164,9 +165,10 @@ $id = $_SESSION['id'];
         }
       }
             //eksekusi ajax
-      ajax.open('GET','aksiSearch.php?key=' + key.value ,true);
+      ajax.open('GET','aksiSearch.php?key=' + searchValue ,true);
       ajax.send();
-    });
-  </script>
+    }
+  });
+</script>
 </body>
 </html>

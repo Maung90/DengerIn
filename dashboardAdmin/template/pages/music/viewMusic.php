@@ -20,9 +20,15 @@ if (isset($_POST['submit'])) {
 	<link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
 	<link rel="stylesheet" href="../../assets/css/style2.css"> 
 	<link rel="stylesheet" href="../../assets/css/style.css"> 
-	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
+	<link rel="shortcut icon" href="http://localhost/DengerIn/dashboardAdmin/template/assets/images/icon-mini.png" />
 
 	<link rel="stylesheet" href="../../assets/DataTables/dataTables/css/dataTables.bootstrap5.css">
+	<style>
+		.form-control:focus{
+			color: grey;
+		}
+
+	</style>
 </head>
 <body>
 	<div class="container-scroller">
@@ -99,7 +105,7 @@ if (isset($_POST['submit'])) {
 													<td><?=$data['penyanyi']  ?> </td>
 													<td> <?=$data['genre']  ?></td>
 													<td>
-														<a class="badge badge-danger" href="deleteMusic.php?id=<?=$data['id_music']?> " style="text-decoration: none;" onclick="confirm('apakah yakin akan dihapus?');">delete</a>
+														<a class="badge badge-danger" href="deleteMusic.php?id=<?=$data['id_music']?> " style="text-decoration: none;">delete</a>
 														<label class="badge badge-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<?= $data['id_music']; ?>" style="cursor: pointer;">
 															update
 														</label>
@@ -114,29 +120,29 @@ if (isset($_POST['submit'])) {
 																	</div>
 																	<div class="modal-body">
 
-																		<form class="forms-sample" method="POST" action="updateUser.php" enctype="multipart/form-data">
+																		<form class="forms-sample" method="POST" action="updateMusic.php" enctype="multipart/form-data">
 																			<input  style="color: grey" type="hidden" name="id" value="<?=$data['id_music']?> ">
 																			<div class="form-group">
-																				<label for="exampleInputName1">title</label>
-																				<input  style="color: grey" type="text" name="titleUpdate" class="form-control" id="exampleInputName1" value="<?=$data['judul']  ?>" autocomplete="off" placeholder="Username">
+																				<label for="exampleInputName1">Judul</label>
+																				<input  style="color: grey" type="file" name="titleUpdate" class="form-control" id="exampleInputName1" value="<?=$data['judul']  ?>" autocomplete="off" placeholder="Judul Lagu">
 																			</div>
 																			<div class="form-group">
 																				<label for="exampleInputEmail3">Artist</label>
-																				<input  style="color: grey" type="email" name="penyanyiUpdate" class="form-control" id="exampleInputEmail3" value="<?=$data['penyanyi']  ?>" autocomplete="off" placeholder="Email">
+																				<input  style="color: grey" type="text" name="penyanyiUpdate" class="form-control" id="exampleInputEmail3" value="<?=$data['penyanyi']  ?>" autocomplete="off" placeholder="Artist" required>
 																			</div>
 																			<div class="form-group">
 																				<label for="exampleInputPassword4">Genre</label>
-																				<input  style="color: grey" type="password" value="<?=$data['genre']  ?>" name="genreUpdate" class="form-control" id="exampleInputPassword4" autocomplete="off" placeholder="Password">
+																				<input  style="color: grey" type="text" value="<?=$data['genre']  ?>" name="genreUpdate" class="form-control" autocomplete="off" placeholder="Genre Lagu " required>
 																			</div>
 																			<div class="form-group">
 																				<label>Cover Lagu</label>
 																				<div class="input-group col-xs-12">
-																					<input  style="color: grey" type="file" value="<?=$data['image']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
+																					<input  style="color: grey" type="file" value="<?=$data['poster_lagu']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
 																				</div>
 																			</div>
 																			<div class="form-group">
 																				<label>Lirik Lagu</label>
-																				<textarea name="lirikUpdate" class="form-control" cols="30" rows="10"><?=$data['lirik']   ?> </textarea>
+																				<textarea name="lirikUpdate" class="form-control" cols="30" rows="10" required><?=$data['lirik']   ?> </textarea>
 																			</div>
 																			<div class="form-group">
 																				<button type="submit" name="submitUpdate" class="btn btn-primary me-2">Submit</button>

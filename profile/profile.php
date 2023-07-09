@@ -16,12 +16,15 @@ $data = mysqli_fetch_array($query);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="profile.css">
   <link rel="stylesheet" href="../HalamanUser/style.css">
+  <link rel="shortcut icon" href="http://localhost/DengerIn/dashboardAdmin/template/assets/images/icon-mini.png">
 </head>
 <body>
   <!-- navbar -->
   <nav class="navbar bg-dark shadow">
     <div class="container-fluid d-flex justify-content-between">
-      <a class="navbar-brand text-white" style="font-family: 'Roboto Slab', serif;font-size: 25px;">DengerIn</a>
+      <a class="navbar-brand text-white" href="index.php">
+      <img src="http://localhost/DengerIn/dashboardAdmin/template/assets/images/Logo-Dengerin.png" alt="logo" width="150px"/>
+      </a>
       <div class="dropdown-custom">
         <label class="profile">
           <i class="fa-regular fa-circle-user text-white iconn"></i>
@@ -49,18 +52,16 @@ $data = mysqli_fetch_array($query);
       <div class="col-1 bg-dark d-flex justify-content-center" style="height: 100vh;">
         <nav class="nav flex-column sidebar">
           <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/index.php">
-            <center>
               <i class="fa-solid fa-house text-white iconn"></i>
-            </center> 
           </a>
           <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/search.php">
-            <i class="fa-solid fa-search iconn" style="color:lightgreen;"></i>
+            <i class="fa-solid fa-search text-white iconn"></i>
           </a>
-          <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/index.php">
+          <a class="nav-link" href="http://localhost/DengerIn/Favoritee/favorite.php">
             <i class="fa-solid fa-heart text-white iconn"></i>
           </a> 
           <div class="scroll" id="style-1">
-            <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/index.php">
+            <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/library.php">
               <i class="fa-solid fa-chart-simple text-white iconn"></i>
             </a>
             <div id="" class="scroll-item">
@@ -68,8 +69,8 @@ $data = mysqli_fetch_array($query);
               $query = mysqli_query($koneksi,"SELECT * FROM playlist_name  WHERE id_user = '$id_user' ");
 
               while ($list = mysqli_fetch_array($query)) : ?> 
-                <a class="list-item" href="#list-item-1">
-                  <img src="../cover1.jpg" class="playlist" alt="...">
+                <a class="list-item" href="../HalamanUser/library.php?id_playlist=<?=$list['id_playlist_name']?>">
+                  <img src="../dashboardAdmin/template/assets/images/cover-playlist/<?=$list['imagePlaylist']?>" class="playlist" alt="...">
                 </a>
               <?php endwhile; ?>
             </div> 

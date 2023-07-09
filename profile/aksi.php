@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
 		email = '$email'
 		WHERE id_user = '$id' ");
 	if ($query) {
-		header("Location : profile.php");
+		header("Location:profile.php");
 	}else{
 		echo "<p style='color:red; font-size:35px;' align='center' > Error 502 </p>";
 	}

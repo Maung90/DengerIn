@@ -12,7 +12,7 @@ if (isset($_POST['insertMusicPlaylist'])) {
 		header("Location:detailMusic.php?id=$id_music");
 	}
 }else if(isset($_POST['buatPlaylist'])){
-	$id_music = $_POST['id'];
+	$id_music = $_POST['id_music'];
 	$id = $_POST['id_user'];
 	$namaPlaylist = $_POST['namaPlaylist'];
 	$coverPlaylist = $_FILES['coverPlaylist']['name'];
@@ -36,7 +36,7 @@ if (isset($_POST['insertMusicPlaylist'])) {
 				}else{
 					echo "<script>
 					alert('insert gagal');
-					document.location = 'search.php';
+					document.location = 'detailMusic.php?id=$id_music';
 					</script>";
 				}
 			}else{

@@ -2,6 +2,15 @@
 <?php 
 require '../koneksi.php';
 $id = $_SESSION['id'];
+
+$queryLeft = mysqli_query($koneksi,"SELECT * FROM banner INNER JOIN playlist_name ON playlist_name.id_playlist_name = banner.id_playlist_name WHERE banner.posisi_banner = 'left' ");
+$queryMid = mysqli_query($koneksi,"SELECT * FROM banner INNER JOIN playlist_name ON playlist_name.id_playlist_name = banner.id_playlist_name WHERE banner.posisi_banner = 'mid' ");
+$queryRight = mysqli_query($koneksi,"SELECT * FROM banner INNER JOIN playlist_name ON playlist_name.id_playlist_name = banner.id_playlist_name WHERE banner.posisi_banner = 'right' ");
+
+$dataLeft = mysqli_fetch_array($queryLeft);
+$dataMid = mysqli_fetch_array($queryMid);
+$dataRight = mysqli_fetch_array($queryRight);
+
 ?>
 <html lang="en">
 <head>
@@ -19,7 +28,7 @@ $id = $_SESSION['id'];
   <nav class="navbar bg-dark shadow">
     <div class="container-fluid d-flex justify-content-between">
       <a class="navbar-brand text-white" href="index.php">
-      <img src="http://localhost/DengerIn/dashboardAdmin/template/assets/images/Logo-Dengerin.png" alt="logo" width="150px"/>
+        <img src="http://localhost/DengerIn/dashboardAdmin/template/assets/images/Logo-Dengerin.png" alt="logo" width="150px"/>
       </a>
       <div class="dropdown-custom">
         <label class="profile">
@@ -39,7 +48,7 @@ $id = $_SESSION['id'];
         <div class="col-1 bg-dark d-flex justify-content-center" style="height: 90vh;">
           <nav class="nav flex-column sidebar">
             <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/index.php">
-                <i class="fa-solid fa-house iconn" style="color:lightgreen;"></i>
+              <i class="fa-solid fa-house iconn" style="color:lightgreen;"></i>
             </a>
             <a class="nav-link" href="http://localhost/DengerIn/HalamanUser/search.php">
               <i class="fa-solid fa-search text-white iconn"></i>
@@ -67,70 +76,70 @@ $id = $_SESSION['id'];
 
       <div class="col-11" style="background-color: #0c0c0c;">
         <div class="row m-3">
+          <div class="col-12">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 100%; height: 100%;">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active" style="height: 300px;">
+                  <img src="caro1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" style="height: 300px;">
+                  <img src="caro22.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" style="height: 300px;">
+                  <img src="caro333.jpg" class="d-block w-100" alt="...">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
         <div class="col-12">
-          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 100%; height: 100%;">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" style="height: 300px;">
-            <img src="caro1.jpg" class="d-block w-100" alt="...">
+          <div class="row m-3 d-flex justify-content-center mt-4" style="height: 200px;">
+            <div class="col-3">
+              <div class="card w-100 h-100">
+               <a class="w-100 h-100" href="viewLaguPlaylist.php?id=<?=$dataLeft['id_playlist_name']; ?>">
+                <img src="../dashboardAdmin/template/assets/images/cover-playlist/<?=$dataLeft['imagePlaylist']; ?>" class="h-100 w-100 rounded"> 
+              </a>
+            </div>
           </div>
-          <div class="carousel-item" style="height: 300px;">
-            <img src="caro22.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item" style="height: 300px;">
-            <img src="caro333.jpg" class="d-block w-100" alt="...">
-          </div>
-        </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-      </div>
-      <div class="col-12">
-        <div class="row m-3 d-flex justify-content-center mt-4" style="height: 200px;">
-        <div class="col-3">
-          <div class="card w-100 h-100">
-           <a class="w-100 h-100" href="#">
-            <img src="p_local.png" class="h-100 w-100 rounded"> 
-           </a>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="card h-100" style="width: 100%">
-           <a class="w-100 h-100" href="#">
-            <img src="p_dengerin1.png" class="h-100 w-100 rounded"> 
-           </a>
+          <div class="col-6">
+            <div class="card h-100" style="width: 100%">
+             <a class="w-100 h-100" href="viewLaguPlaylist.php?id=<?=$dataMid['id_playlist_name']; ?>">
+              <img src="../dashboardAdmin/template/assets/images/cover-playlist/<?=$dataMid['imagePlaylist']; ?>" class="h-100 w-100 rounded"> 
+            </a>
           </div>
         </div>
         <div class="col-3">
           <div class="card w-100 h-100">
-           <a class="w-100 h-100" href="#">
-            <img src="p_tiktok.png" class="h-100 w-100 rounded"> 
-           </a>
-          </div>
+           <a class="w-100 h-100" href="viewLaguPlaylist.php?id=<?=$dataRight['id_playlist_name']; ?>">
+            <img src="../dashboardAdmin/template/assets/images/cover-playlist/<?=$dataRight['imagePlaylist']; ?>" class="h-100 w-100 rounded"> 
+          </a>
         </div>
-        </div>
-      </div>  
       </div>
+    </div>
+  </div>  
+</div>
 </div>
 
-  <script>
+<script>
   // Inisialisasi carousel
-    var myCarousel = document.querySelector('#carouselExampleIndicators');
-    var carousel = new bootstrap.Carousel(myCarousel, {
+  var myCarousel = document.querySelector('#carouselExampleIndicators');
+  var carousel = new bootstrap.Carousel(myCarousel, {
       interval: 3000, // Waktu per ganti slide dalam milidetik (misal: 3000 = 3 detik)
       wrap: true // Berganti ke slide pertama setelah mencapai slide terakhir
-  });
+    });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -146,6 +155,6 @@ $id = $_SESSION['id'];
       menuDropdown.style.display = 'none';
     });
   </script>
-  </script>
+</script>
 </body>
 </html>

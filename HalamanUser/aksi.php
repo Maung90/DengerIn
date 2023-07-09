@@ -12,7 +12,7 @@ if (isset($_POST['insertMusicPlaylist'])) {
 		header("Location:detailMusic.php?id=$id_music");
 	}
 }else if(isset($_POST['buatPlaylist'])){
-	$id_music = $_POST['id'];
+	$id_music = $_POST['id_music'];
 	$id = $_POST['id_user'];
 	$namaPlaylist = $_POST['namaPlaylist'];
 	$coverPlaylist = $_FILES['coverPlaylist']['name'];
@@ -36,7 +36,7 @@ if (isset($_POST['insertMusicPlaylist'])) {
 				}else{
 					echo "<script>
 					alert('insert gagal');
-					document.location = 'search.php';
+					document.location = 'detailMusic.php?id=$id_music';
 					</script>";
 				}
 			}else{
@@ -46,6 +46,20 @@ if (isset($_POST['insertMusicPlaylist'])) {
 			echo "<br> File Kegeedan : ", $sizeFile;
 		}
 	}
+}else if(isset($_GET['id_music']) && isset($_GET['id_playlist'])) {
+	$id_music = $_GET['id_music'];
+	$idPlaylistName = $_GET['id_playlist'];
+	$id_user = $_SESSION['id'];
+	$query = 	mysqli_query($koneksi,"DELETE FROM playlist WHERE id_user = '$id_user' AND id_music = '$id_music' AND id_playlist_name = '$idPlaylistName' ");
+	if ($query) {
+		header("Location:library.php");
+	}else{
+		echo "<script>
+		alert('Hapus lagu gagal!');
+		document.location = 'library.php';
+		</script>";
+	}
+
 }else{
 	echo "<script>
 	alert('Tidak Memiliki Akses!');

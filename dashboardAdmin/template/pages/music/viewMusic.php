@@ -67,13 +67,6 @@ if (isset($_POST['submit'])) {
 												</span>
 											</div>
 										</div>
-										<div class="form-group">
-											<label>Lirik</label>
-											<div class="input-group col-xs-12">
-												<textarea name="lirik" class="form-control" cols="30" rows="10" placeholder="Lirik"></textarea>
-											</span>
-										</div>
-									</div>
 									<button type="submit" name="submit" class="btn btn-primary me-2">Submit</button>
 									<button type="reset" class="btn btn-dark">Cancel</button>
 								</form>
@@ -139,10 +132,6 @@ if (isset($_POST['submit'])) {
 																				<div class="input-group col-xs-12">
 																					<input  style="color: grey" type="file" value="<?=$data['poster_lagu']  ?>" name="imageUpdate" class="form-control file-upload-info" autocomplete="off" placeholder="Upload Image">
 																				</div>
-																			</div>
-																			<div class="form-group">
-																				<label>Lirik Lagu</label>
-																				<textarea name="lirikUpdate" class="form-control" cols="30" rows="10" required><?=$data['lirik']   ?> </textarea>
 																			</div>
 																			<div class="form-group">
 																				<button type="submit" name="submitUpdate" class="btn btn-primary me-2">Submit</button>

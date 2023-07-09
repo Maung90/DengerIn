@@ -96,9 +96,8 @@ function deleteDataMusic($id){
 function insertDataMusic($data,$file){
 	global $koneksi;
 	$artist = $data['artist'];
-	$genre = $data['genre'];
-	$lirik = $data['lirik'];
-	$title = $file['title']['name'];
+	$genre = $data['genre']; 
+	$title = $file['title']['name']; 
 	$image = $file["image"]["name"];
 
 	/* TARGET DIR */
@@ -132,7 +131,7 @@ function insertDataMusic($data,$file){
 			else{
 				if (move_uploaded_file($_FILES["image"]["tmp_name"],$cover_name) AND move_uploaded_file($_FILES["title"]["tmp_name"],$music_file)) {
 					$query = mysqli_query($koneksi,"INSERT INTO music VALUES 
-						('','$title','$genre','$artist','$cover_name2','$lirik')");
+						('','$title','$genre','$artist','$cover_name2')");
 					if (!$query) {
 						echo "gagal";
 					}
@@ -151,7 +150,6 @@ function updateMusic($data,$file){
 	$id = $data['id'];
 	$artist = $data['penyanyiUpdate'];
 	$genre = $data['genreUpdate'];
-	$lirik = $data['lirikUpdate'];
 	$title = $file['titleUpdate']['name'];
 	$image = $file["imageUpdate"]["name"];
 
@@ -190,8 +188,7 @@ function updateMusic($data,$file){
 							judul = '$title',
 							genre = '$genre',
 							penyanyi = '$artist',
-							poster_lagu = '$cover_name2',
-							lirik = '$lirik' WHERE id_music = '$id' ");
+							poster_lagu = '$cover_name2' WHERE id_music = '$id' ");
 						if (!$query) {
 							echo "gagal";
 						}

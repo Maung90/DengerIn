@@ -17,7 +17,7 @@ if(isset($_GET['key'])){
           <?php 
           if(mysqli_num_rows($result) > 0){ 
             while ($data2 = mysqli_fetch_array($result)) : ?>
-              <div class="list col-2">
+              <div class="list col-2 mb-3">
                 <div class="card-custom">
                   <a href="detailMusic.php?id=<?=$data2['id_music']?>" class="link" style="text-decoration:none;">
                     <img src="../dashboardAdmin/template/assets/images/cover-music/<?=$data2['poster_lagu']?> " class="card-img-top" width="150px" height="150px" alt="...">

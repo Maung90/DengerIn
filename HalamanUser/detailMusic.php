@@ -91,19 +91,22 @@ $randMusic2 = mysqli_fetch_array($query2);
 			<div class="col-11" style="background-color: #0c0c0c;">
 				<div class="row m-5" style="height: 100vh;">
 					<div class="col-12" style="font-size: 25px;color:lightgrey;line-height: 0px;">
-						<p style="">
-							<?= str_replace($rep,' ',$data['judul'])?>
-						</p>
+
 					</div>
 					<div class="col-7 " style="margin-top:-60px;height: 70%;background-image:url('../dashboardAdmin/template/assets/images/cover-music/<?=$data['poster_lagu']?>');background-repeat: no-repeat;background-size: cover;">
 					</div>
-					<div class="col-5" style="margin-top:-60px;height: 70%;background-color: #202020;border-radius: 0 5px;display: flex;justify-content: center;align-items: center;">
-						<p style="color:lightgreen;font-size: 18px;">
-							<?=$data['lirik']; ?>
-						</p>
+					<div class="col-5" style="margin-top:-60px;height: 70%;background-color: #202020;border-radius: 0 5px;">
+						<div style="margin-top: 180px;">
+							<p style="color:white;font-size: 35px;font-weight: bolder;" align="center">
+								<?= str_replace($rep,' ',$data['judul'])?>
+							</p>
+							<p style="color:white;font-size: 20px;" align="center">
+								<?=$data['penyanyi']?>
+							</p>
+						</div>
 					</div>
 					<div class="col-12 d-flex justify-content-center align-items-center" style="border-radius: 0 0 5px 5px;margin-top:-100px;background-color:#202020;height: 110px;">
-						<audio controls autoplay id="myAudio" style="width:60%;margin:0 10px;">
+						<audio controls id="myAudio" style="width:60%;margin:0 10px;">
 							<source src="../dashboardAdmin/template/assets/music/<?=$data['judul']; ?>" type="audio/mp3">
 							</audio>
 							<div class="controls">

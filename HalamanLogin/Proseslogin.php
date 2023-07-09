@@ -24,7 +24,7 @@ if ($data > 0) {
         print "Tidak ada username atau password";
     }
 }else{
-    header("location:Form.php");
+    header("location:Login.php");
 }
 
 ?>
